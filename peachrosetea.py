@@ -27,7 +27,7 @@ class StdOutListener(StreamListener):
     This is a basic listener that just prints received tweets to stdout.
     """
     def on_data(self, data):
-        if 'fruit' in data:
+        if 'fruit' or 'peach' in data:
           print random.choice(pycorpora.foods.fruits['fruits']) + " (fruit)"
           return True
         elif 'tea' in data:
@@ -46,4 +46,4 @@ if __name__ == '__main__':
     auth.set_access_token(access_token, access_token_secret)
 
     stream = Stream(auth, l)
-    stream.filter(track=['fruit','tea','rose'])
+    stream.filter(track=['fruit','peach','tea','rose'])
