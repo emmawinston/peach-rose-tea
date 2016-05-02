@@ -1,63 +1,49 @@
 import tweepy
 import pycorpora
 import random
+import json
+
+from tweepy.streaming import StreamListener
+from tweepy import OAuthHandler
+from tweepy import Stream
+
+access_token_secret="foo"
+
+access_token="foo"
+
+consumer_key="foo"
+
+consumer_secret="foo"
 
 
+#override tweepy.StreamListener to add logic to on_status
+class MyStreamListener(tweepy.StreamListener):
 
-# print a random flower name
+    def on_status(self, status):
+        print(status.text)
 
-print random.choice(pycorpora.foods.fruits['fruits'])
-print random.choice(pycorpora.plants.flowers['flowers'])
-print random.choice(pycorpora.foods.tea['teas'])
+class StdOutListener(StreamListener):
+    """ A listener handles tweets that are received from the stream.
+    This is a basic listener that just prints received tweets to stdout.
+    """
+    def on_data(self, data):
+        if 'fruit' in data:
+          print random.choice(pycorpora.foods.fruits['fruits']) + " (fruit)"
+          return True
+        elif 'tea' in data:
+          print random.choice(pycorpora.foods.tea['teas']) + " (tea)"
+          return True
+        elif 'rose' in data:
+          print random.choice(pycorpora.plants.flowers['flowers']) + " (flower)"
+          return True
 
+    def on_error(self, status):
+        print(status.text)
 
-OAUTH_SECRET    = "foo"
+if __name__ == '__main__':
+    l = StdOutListener()
+    auth = OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_token, access_token_secret)
 
-OAUTH_TOKEN     = "foo"
-
-CONSUMER_KEY    = "foo"
-
-CONSUMER_SECRET = "foo"
-
-
-#################################### term searches ######################################################
-#### PEACH #####
-
-def track():
-
-  # Prompt for login credentials and setup stream object
-
-  TRACK_TERM = 'peach'
-
-  api = TwitterAPI(CONSUMER_KEY, CONSUMER_SECRET, OAUTH_TOKEN, OAUTH_SECRET)
-
-  f = api.request('statuses/filter', {'track': TRACK_TERM})
-
-  for item in f:
-    if 'text' in item:
-
-      # print item['text'].split()
-      splitTweet = item['text'].split()
-      
-      counts = []
-
-      for t in splitTweet:
-        try:
-          counts.append(dictionary[t.lower()])
-        except: 
-          print ''
-
-      item['counts'] = counts
-
-
-      if 'retweeted_status' in item:
-
-        item2 = item['retweeted_status']
-        #print(item2['favorite_count'])
-        #splitTweet = item2['favorite_count'].split()
-
-        favorites = []
-
-        favorites.append(item2['favorite_count'])
-      
-        sendOSC(item)
+    stream = Stream(auth, l)
+    stream.filter(track=['fruit','tea','rose'])
