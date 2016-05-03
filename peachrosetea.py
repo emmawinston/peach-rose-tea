@@ -2,6 +2,7 @@ import tweepy
 import pycorpora
 import random
 import json
+import os
 
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
@@ -16,6 +17,8 @@ consumer_key="foo"
 consumer_secret="foo"
 
 
+pitches = ['60', '62', '64', '66', '68']
+
 #override tweepy.StreamListener to add logic to on_status
 class MyStreamListener(tweepy.StreamListener):
 
@@ -27,14 +30,46 @@ class StdOutListener(StreamListener):
     This is a basic listener that just prints received tweets to stdout.
     """
     def on_data(self, data):
-        if 'fruit' or 'peach' in data:
-          print random.choice(pycorpora.foods.fruits['fruits']) + " (fruit)"
+        if 'fruit' in data:
+          myfruit = []
+          myfruit = random.choice(pycorpora.foods.fruits['fruits'])
+          print myfruit + " (fruit)"
+
+          pitch = (random.choice(pitches))
+
+          singfruit = """osascript<<END
+          say " """ + myfruit + """ " using "junior" pitch """ + pitch + """ 
+          END"""
+
+          os.system(singfruit)
           return True
+
         elif 'tea' in data:
-          print random.choice(pycorpora.foods.tea['teas']) + " (tea)"
+          mytea = []
+          mytea = random.choice(pycorpora.foods.tea['teas'])
+          print mytea + " (tea)"
+
+          pitch = (random.choice(pitches))
+
+          singtea = """osascript<<END
+          say " """ + mytea + """ " using "junior" pitch """ + pitch + """ 
+          END"""
+
+          os.system(singtea)
           return True
+
         elif 'rose' in data:
-          print random.choice(pycorpora.plants.flowers['flowers']) + " (flower)"
+          myflower = []
+          myflower = random.choice(pycorpora.plants.flowers['flowers'])
+          print myflower + " (flower)"
+
+          pitch = (random.choice(pitches))
+          
+          singflower = """osascript<<END
+          say " """ + myflower + """ " using "junior" pitch """ + pitch + """ 
+          END"""
+
+          os.system(singflower)
           return True
 
     def on_error(self, status):
@@ -46,4 +81,4 @@ if __name__ == '__main__':
     auth.set_access_token(access_token, access_token_secret)
 
     stream = Stream(auth, l)
-    stream.filter(track=['fruit','peach','tea','rose'])
+    stream.filter(track=['fruit','tea','rose'])
