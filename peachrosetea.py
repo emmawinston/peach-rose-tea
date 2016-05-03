@@ -34,7 +34,7 @@ class StdOutListener(StreamListener):
         if 'fruit' in data:
           myfruit = []
           myfruit = random.choice(pycorpora.foods.fruits['fruits'])
-          unidecode.unidecode(myfruit)
+          myfruit = unidecode.unidecode(myfruit)
           print myfruit + " (fruit)"
 
           pitch = (random.choice(pitches))
@@ -48,7 +48,7 @@ class StdOutListener(StreamListener):
         elif 'tea' in data:
           mytea = []
           mytea = random.choice(pycorpora.foods.tea['teas'])
-          unidecode.unidecode(mytea)
+          myfruit = unidecode.unidecode(mytea)
           print mytea + " (tea)"
 
           pitch = (random.choice(pitches))
@@ -62,7 +62,7 @@ class StdOutListener(StreamListener):
         elif 'rose' in data:
           myflower = []
           myflower = random.choice(pycorpora.plants.flowers['flowers'])
-          unidecode.unidecode(myflower)
+          myfruit = unidecode.unidecode(myflower)
           print myflower + " (flower)"
 
           pitch = (random.choice(pitches))
