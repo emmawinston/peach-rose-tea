@@ -38,8 +38,7 @@ class StdOutListener(StreamListener):
           pitch = (random.choice(pitches))
 
           singfruit = """osascript<<END
-          say " """ + myfruit + """ " using "junior" pitch """ + pitch + """ 
-          END"""
+          say " """ + myfruit + """ " using "junior" pitch """ + pitch + """ """
 
           os.system(singfruit)
           return True
@@ -52,8 +51,7 @@ class StdOutListener(StreamListener):
           pitch = (random.choice(pitches))
 
           singtea = """osascript<<END
-          say " """ + mytea + """ " using "junior" pitch """ + pitch + """ 
-          END"""
+          say " """ + mytea + """ " using "junior" pitch """ + pitch + """ """
 
           os.system(singtea)
           return True
@@ -66,8 +64,7 @@ class StdOutListener(StreamListener):
           pitch = (random.choice(pitches))
           
           singflower = """osascript<<END
-          say " """ + myflower + """ " using "junior" pitch """ + pitch + """ 
-          END"""
+          say " """ + myflower + """ " using "junior" pitch """ + pitch + """ """
 
           os.system(singflower)
           return True
