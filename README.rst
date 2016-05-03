@@ -1,3 +1,15 @@
+Peach Rose Tea 
+==============
+
+A Weird Thing I built for one of the tracks on the album I'm working on, using Allison Parrish's Pycorpora and Tweepy. When someone mentions a fruit in the Twitter streaming API, grabs a random fruit from its corpus. When someone mentions a flower, grabs a flower. When someone mentions a tea, grabs a tea.
+
+Each time it does so it selects from an array of specified pitches, allowing it to 'sing' in a corresponding key to what will eventually be the backing track.
+
+It throws AppleScript errors but seems to work regardless, so ¯\_(ツ)_/¯
+
+Below is Allison's readme for the original pycorpora.
+
+
 pycorpora
 =========
 
