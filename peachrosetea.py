@@ -4,6 +4,7 @@ import random
 import json
 import os
 import unidecode
+import time
 
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
@@ -17,8 +18,8 @@ consumer_key="foo"
 
 consumer_secret="foo"
 
-
-pitches = ['60', '62', '64', '66', '68']
+pitches = ['57', '60', '62', '65', '69', '72', '74']
+times = [1, 2, 3, 4, 5]
 
 #override tweepy.StreamListener to add logic to on_status
 class MyStreamListener(tweepy.StreamListener):
@@ -43,20 +44,22 @@ class StdOutListener(StreamListener):
           say " """ + myfruitdecode + """ " using "junior" modulation 1 pitch """ + pitch + """ """
 
           os.system(singfruit)
+          time.sleep(random.choice(times))
           return True
 
         elif 'tea' in data:
           mytea = []
           mytea = random.choice(pycorpora.foods.tea['teas'])
           myteadecode = unidecode.unidecode(mytea)
-          print myteadecode + " (tea)"
-
           pitch = (random.choice(pitches))
+
+          print myteadecode + " (tea)"
 
           singtea = """osascript<<END
           say " """ + myteadecode + """ " using "junior" modulation 1 pitch """ + pitch + """ """
 
           os.system(singtea)
+          time.sleep(random.choice(times))
           return True
 
         elif 'rose' in data:
@@ -71,6 +74,7 @@ class StdOutListener(StreamListener):
           say " """ + myflowerdecode + """ " using "junior" modulation 1 pitch """ + pitch + """ """
 
           os.system(singflower)
+          time.sleep(random.choice(times))
           return True
 
     def on_error(self, status):
