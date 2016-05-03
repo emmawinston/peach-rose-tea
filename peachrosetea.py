@@ -40,7 +40,7 @@ class StdOutListener(StreamListener):
           pitch = (random.choice(pitches))
 
           singfruit = """osascript<<END
-          say " """ + myfruit + """ " using "junior" pitch """ + pitch + """ """
+          say " """ + myfruitdecode + """ " using "junior" pitch """ + pitch + """ """
 
           os.system(singfruit)
           return True
@@ -48,13 +48,13 @@ class StdOutListener(StreamListener):
         elif 'tea' in data:
           mytea = []
           mytea = random.choice(pycorpora.foods.tea['teas'])
-          myfruit = unidecode.unidecode(mytea)
+          myteadecode = unidecode.unidecode(mytea)
           print mytea + " (tea)"
 
           pitch = (random.choice(pitches))
 
           singtea = """osascript<<END
-          say " """ + mytea + """ " using "junior" pitch """ + pitch + """ """
+          say " """ + myteadecode + """ " using "junior" pitch """ + pitch + """ """
 
           os.system(singtea)
           return True
@@ -62,13 +62,13 @@ class StdOutListener(StreamListener):
         elif 'rose' in data:
           myflower = []
           myflower = random.choice(pycorpora.plants.flowers['flowers'])
-          myfruit = unidecode.unidecode(myflower)
+          myflowerdecode = unidecode.unidecode(myflower)
           print myflower + " (flower)"
 
           pitch = (random.choice(pitches))
           
           singflower = """osascript<<END
-          say " """ + myflower + """ " using "junior" pitch """ + pitch + """ """
+          say " """ + myflowerdecode + """ " using "junior" pitch """ + pitch + """ """
 
           os.system(singflower)
           return True
